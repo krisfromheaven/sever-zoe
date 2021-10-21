@@ -1,5 +1,4 @@
 const path = require('path')
-const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin')
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/sever-zoe/'
@@ -25,24 +24,7 @@ module.exports = {
   css: {
     sourceMap: process.env.NODE_ENV !== 'production'
   },
-  productionSourceMap: process.env.NODE_ENV !== 'production',
-  configureWebpack: {
-    plugins: [
-      new ImageminWebpWebpackPlugin({
-          config: [{
-            test: /\.(jpe?g|png)/,
-            options: {
-              quality: 75
-            }
-          }],
-          overrideExtension: true,
-          detailedLogs: false,
-          silent: false,
-          strict: true
-        }
-      )
-    ]
-  }
+  productionSourceMap: process.env.NODE_ENV !== 'production'
 }
 
 function addStyleResource(rule) {
