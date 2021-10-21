@@ -1,5 +1,9 @@
 <template lang='pug'>
-  .container
-    h1  KOTE
-    img(src='@/assets/download.jpg')
+  p главная страница
 </template>
+
+<style lang='stylus'>
+  p
+    font-size 60rem
+
+</style>
