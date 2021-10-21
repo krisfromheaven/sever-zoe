@@ -16,9 +16,15 @@ module.exports = {
       .use('vue-svg-loader')
       .loader('vue-svg-loader')
 
-    config.plugin('define').tap(definitions => {
-      definitions[0]['process.env']['NODE_ANALYTICS'] = '"development"'
-      return definitions
+    config.plugin('define').tap(args => {
+      args[0]['process.env']['NODE_ANALYTICS'] = '"development"'
+      args[0].meta = {
+        viewport: 'width=device-width,initial-scale=1,user-scalable=no'
+      }
+      args[0].inject = true
+      args[0].filename = 'index.html'
+      args[0].favicon = './public/favicon.ico'
+      return args
     })
   },
   css: {
