@@ -3,12 +3,9 @@
   background $primary url("./assets/img/intro-bg.png") center / cover no-repeat
   display flex
   align-items center
-  position absolute
-  top 0
-  left 0
-  right 0
+  margin-top -75rem
   @media $mobile
-   background $primary url("./assets/img/intro-bg-m.png")  bottom / contain  no-repeat
+    background $primary url("./assets/img/intro-bg-m.png") bottom / contain no-repeat
 
   & > .container
     display flex
@@ -20,7 +17,7 @@
     @media $mobile
       position relative
       width 100%
-      padding 100rem 27rem 300rem
+      padding 120rem 27rem 300rem
       text-align center
 
     &-title
@@ -69,4 +66,29 @@
       @media $mobile
         font-size 15rem
         font-weight 22rem
+
+.about__description
+  padding 160rem 0 300rem
+  @media $mobile
+    padding 100rem 0 130rem
+
+  &-title
+    font-size 25rem
+    line-height 31rem
+    font-weight 700
+    color #000
+    margin-bottom 32rem
+    @media $mobile
+      font-size 19rem
+
+  &-text
+    font-size 17rem
+    line-height 30rem
+    color $primary
+    @media $mobile
+      font-size 19rem
+      line-height 24rem
+
+    & > p:last-child
+      padding-top 20rem
 

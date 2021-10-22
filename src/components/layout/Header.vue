@@ -18,10 +18,33 @@
         type='button'
         :class='["burger__btn", {open: $store.state.common.burgerIsOpen }]'
         v-if='$store.state.common.mobile'
-        @click.prevent='$store.state.common.burgerIsOpen = !$store.state.common.burgerIsOpen'
-        )
+        @click.prevent='$store.commit("common/BURGER_TOGGLE")'
+      )
         span
         span
         span
 </template>
 
+<script>
+import { qs } from '@/helpers'
+import { mapState } from 'vuex'
+
+export default {
+  name: 'Header',
+  computed: {
+    ...mapState({
+      burgerIsOpen: s => s.common.burgerIsOpen
+    })
+  },
+  watch: {
+    burgerIsOpen(val) {
+      val ? qs('body').classList.add('lock') : qs('body').classList.remove('lock')
+    },
+    '$screen.width'() {
+      if (this.burgerIsOpen) {
+        this.$store.commit("common/BURGER_TOGGLE")
+      }
+    }
+  }
+}
+</script>
