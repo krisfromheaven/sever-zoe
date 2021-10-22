@@ -30,7 +30,14 @@ module.exports = {
   css: {
     sourceMap: process.env.NODE_ENV !== 'production'
   },
-  productionSourceMap: process.env.NODE_ENV !== 'production'
+  productionSourceMap: process.env.NODE_ENV !== 'production',
+  configureWebpack: {
+    resolve: {
+       alias: {
+          '@': path.resolve(__dirname,'src')
+       },
+     },
+  }
 }
 
 function addStyleResource(rule) {
