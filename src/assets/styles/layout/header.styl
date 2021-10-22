@@ -1,0 +1,119 @@
+.header
+  padding-top 36rem
+  position relative
+  z-index 1
+  color $second
+  display flex
+  align-items center
+  @media $mobile
+    padding-top 25rem
+
+  & > .container
+    display flex
+    align-items center
+    justify-content space-between
+
+  &__logo
+    font-family $ml
+    font-size 30rem
+    @media $mobile
+      font-size 22em
+  &__nav
+    @media $mobile
+      height 100%
+      width 100%
+      position fixed
+      top 0
+      left 0
+      right 0
+      z-index 2
+      background-color #fff
+      display flex
+      justify-content center
+      overflow-y scroll
+      opacity 0
+      visibility hidden
+      transition opacity .5s ease,visibility .5s ease
+      &.open
+        opacity 1
+        visibility visible
+
+    &-list
+      padding-top 5rem
+      display flex
+      align-items center
+      justify-content center
+
+      @media $mobile
+        padding 200rem 0
+        flex-direction column
+
+    &-item
+      padding-bottom 2rem
+      font-size 17rem
+      margin-left 50rem
+      position relative
+      @media $mobile
+        padding-bottom 0
+        margin-left 0
+        margin-bottom 40rem
+
+
+      &:after
+        content ''
+        height 1rem
+        width 100%
+        background-color $second
+        position absolute
+        bottom 0
+        left 0
+        right 0
+        opacity 0
+        transition opacity 0.5s ease
+
+      &:hover:after
+        opacity 1
+
+      & > a
+        color $second
+        @media $mobile
+          color $gray
+
+.burger__btn
+  height 21rem
+  width 30rem
+  position relative
+  z-index 10
+
+  & > span
+    height 2rem
+    width 100%
+    background-color $second
+    position absolute
+    border-radius 2rem
+    left 0
+    transition all .5s ease
+
+    &:nth-child(1)
+      top 0
+
+    &:nth-child(2)
+      top 50%
+
+    &:nth-child(3)
+      top 100%
+
+  &.open > span
+    background-color rgba($primary, 0.5)
+
+    &:nth-child(1)
+      top 50%
+      transform rotate(50deg)
+
+    &:nth-child(2)
+      opacity 0
+
+    &:nth-child(3)
+      top 50%
+      transform rotate(-50deg)
+

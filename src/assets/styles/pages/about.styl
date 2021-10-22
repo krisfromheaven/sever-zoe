@@ -1,0 +1,72 @@
+.about
+  min-height 100vh
+  background $primary url("./assets/img/intro-bg.png") center / cover no-repeat
+  display flex
+  align-items center
+  position absolute
+  top 0
+  left 0
+  right 0
+  @media $mobile
+   background $primary url("./assets/img/intro-bg-m.png")  bottom / contain  no-repeat
+
+  & > .container
+    display flex
+    justify-content flex-end
+
+  &__text
+    width 735rem
+    font-family $ep
+    @media $mobile
+      position relative
+      width 100%
+      padding 100rem 27rem 300rem
+      text-align center
+
+    &-title
+      position relative
+      margin-bottom 70rem
+      color $second
+      font-size 50rem
+      line-height 70rem
+      font-weight normal
+      @media $mobile
+        font-size 27rem
+        line-height 38rem
+        margin-bottom 43rem
+
+
+      &:after
+        content '”'
+        font-size 100rem
+        position absolute
+        left 88%
+        top 120%
+        color rgba(248, 248, 248, 0.4)
+        @media $mobile
+          font-size 70rem
+          left 95%
+          top 110%
+
+      &:before
+        content '”'
+        transform rotate(180deg)
+        font-size 100rem
+        position absolute
+        right 100%
+        bottom 120%
+        color rgba(248, 248, 248, 0.4)
+        @media $mobile
+          font-size 70rem
+          right 96%
+          bottom 115%
+
+    &-subtitle
+      font-style italic
+      font-size 20rem
+      font-weight 24rem
+      color rgba(248, 248, 248, 0.8)
+      @media $mobile
+        font-size 15rem
+        font-weight 22rem
+

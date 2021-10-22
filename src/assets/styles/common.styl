@@ -1,8 +1,15 @@
 html
   ff $ml, sans-serif
-  font-size vh(1, 1080)
+  font-size vw(1, 1920)
   @media $mobile
-    font-size vw(1, 660)
+    font-size vw(1,320)
 
 body
-  oh()
+  background url("/assets/img/bg.png") center / cover repeat
+  color $primary
+
+.container
+  width 100%
+  max-width 1400rem
+  margin 0 auto
+  padding 0 12rem
