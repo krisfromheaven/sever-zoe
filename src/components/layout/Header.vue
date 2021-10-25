@@ -1,5 +1,5 @@
 <template lang='pug'>
-  header.header
+  header(:class='["header", {light: isHero}]')
     .container
       span.header__logo Zoe Sever
       nav(:class='["header__nav", {open: $store.state.common.burgerIsOpen }]')
@@ -14,9 +14,15 @@
             router-link(to='/' ) Art pieces all over the world
           li.header__nav-item
             router-link(to='/' ) Contacts
+          li.header__nav-item
+            a(
+              href='#'
+              v-if='$store.state.auth.user.loggedIn'
+              @click.prevent='logout'
+            ) Logout
       button(
         type='button'
-        :class='["burger__btn", {open: $store.state.common.burgerIsOpen }]'
+        :class='["burger__btn", {open: $store.state.common.burgerIsOpen }, {dark: this.$route.name === String("About")}]'
         v-if='$store.state.common.mobile'
         @click.prevent='$store.commit("common/BURGER_TOGGLE")'
       )
@@ -34,7 +40,15 @@ export default {
   computed: {
     ...mapState({
       burgerIsOpen: s => s.common.burgerIsOpen
-    })
+    }),
+    isHero() {
+      return this.$route.name === String('About') && !this.$store.state.common.mobile
+    }
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('auth/logout')
+    }
   },
   watch: {
     burgerIsOpen(val) {
@@ -42,7 +56,7 @@ export default {
     },
     '$screen.width'() {
       if (this.burgerIsOpen) {
-        this.$store.commit("common/BURGER_TOGGLE")
+        this.$store.commit('common/BURGER_TOGGLE')
       }
     }
   }

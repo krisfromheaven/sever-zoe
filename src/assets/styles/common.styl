@@ -2,16 +2,38 @@ html
   ff $ml, sans-serif
   font-size vw(1, 1920)
   @media $mobile
-    font-size vw(1,320)
+    font-size vw(1, 320)
 
 body
   background url("/assets/img/bg.png") center / cover repeat
   color $primary
+
   &.lock
     overflow hidden
+
+.main
+  display flex
+  flex-direction column
+  min-height 100vh
+
+  &__content
+    display flex
+    flex-direction column
+    flex-grow 1
 
 .container
   width 100%
   max-width 1400rem
   margin 0 auto
   padding 0 12rem
+
+.title
+  padding-top 125rem
+  font-size 85rem
+  line-height 106rem
+  text-transform uppercase
+  color $primary
+  @media $mobile
+    font-size 31rem
+    line-height 41rem
+    padding-top 55rem

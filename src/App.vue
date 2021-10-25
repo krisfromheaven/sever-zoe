@@ -1,11 +1,10 @@
 <template lang='pug'>
   main.main
-    <Header :page="key" />
+    Header
     .main__content
-      <transition name="fade" mode="out-in">
-        <router-view :key="key"></router-view>
-      </transition>
-    <Footer :page="key" />
+      transition(name="fade" mode="out-in")
+        RouterView
+    Footer
 </template>
 
 <script>
@@ -17,12 +16,6 @@ export default {
   components: {
     Header,
     Footer
-  },
-  computed: {
-    key() {
-      return this.$route.meta.key !== undefined
-        ? this.$route.meta.key : this.$route
-    }
   }
 }
 </script>

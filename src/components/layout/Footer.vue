@@ -19,7 +19,7 @@
           li.footer__nav-item
             router-link(to='/' ) Contacts
       span.footer__copy  Zoe Sever, 2021 / All rights reserved
-    button.footer__btn(type='button' @click.prevent='login')
+    button.footer__btn(type='button' @click.prevent='$router.push("/auth")')
       Logo.footer__logo
 </template>
 
@@ -31,10 +31,5 @@ import Logo from '@/assets/img/logo.svg'
 export default {
   name: 'Footer',
   components: { Facebook, Gmail, Logo },
-  methods: {
-    login(){
-      console.log('login')
-    }
-  }
 }
 </script>

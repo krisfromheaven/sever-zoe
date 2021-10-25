@@ -15,8 +15,12 @@
       width 31rem
       fill #8f8f8f
       transition fill .5s ease
+      @media $mobile
+        margin 0 10rem
       &:first-child
         margin-right 24rem
+        @media $mobile
+          margin-right 10rem
       &:hover
         fill $primary
   &__nav
@@ -32,6 +36,7 @@
         color $gray
         transition color .5s ease
         padding-bottom 2rem
+
         &:after
           content ''
           width 100%

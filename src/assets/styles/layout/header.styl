@@ -2,11 +2,23 @@
   padding-top 36rem
   position relative
   z-index 1
-  color $second
   display flex
   align-items center
   @media $mobile
     padding-top 25rem
+
+  &.light .header__logo
+    color $second
+
+  &.light .header__nav-item > a
+    color $second
+
+  & .header__nav-item > a
+    color $gray
+    transition color .5s
+
+  &.light .header__nav-item:after
+    background-color $second
 
   & > .container
     display flex
@@ -16,6 +28,8 @@
   &__logo
     font-family $ml
     font-size 30rem
+    color $primary
+    transition color .5s
     @media $mobile
       font-size 22em
 
@@ -64,23 +78,21 @@
         content ''
         height 1rem
         width 100%
-        background-color $second
+        background-color $gray
         position absolute
         bottom 0
         left 0
         right 0
         opacity 0
-        transition opacity 0.5s ease
+        transition opacity .5s ease, color .5s
 
       &:hover:after
         opacity 1
 
       & > a
-        color $second
-        @media $mobile
-          color $gray
-          &:hover
-            color $primary
+
+        &:hover
+          color $primary
 
 .burger__btn
   height 21rem
@@ -89,15 +101,17 @@
   z-index 10
   @media $desktop
     display none
-
+  &.dark > span
+    background-color $second
   & > span
     height 2rem
     width 100%
-    background-color $second
+    background-color $gray
     position absolute
     border-radius 2rem
     left 0
     transition all .5s ease
+
 
     &:nth-child(1)
       top 0
@@ -109,7 +123,7 @@
       top 100%
 
   &.open > span
-    background-color rgba($primary, 0.5)
+    background-color rgba($gray, 1)
 
     &:nth-child(1)
       top 50%

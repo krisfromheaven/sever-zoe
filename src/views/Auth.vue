@@ -1,0 +1,48 @@
+<template lang='pug'>
+  section.auth
+    .container
+      h1.auth__title.title authorization
+      transition(name='fade' mode='out-in' v-if='$store.state.auth.user.loggedIn')
+        h2.auth__suptitle You are logged in
+      form.form.auth__form(@submit.prevent='onSubmit' v-else )
+        .form__control
+          label.form__label(for='email') Email
+          input.form__input(type='email' id='email' v-model='email' )
+        .form__control
+          label.form__label(for='password') Password
+          input.form__input(type='password' id='password' v-model='password' )
+        button.form__btn.btn(type='submit') Log in
+        span.form__error(:class='{error: $store.state.auth.error}' ) {{ showMessage }}
+
+</template>
+
+<script>
+import message from '../utils/message'
+
+export default {
+  name: 'Auth',
+  data: () => ({
+    email: '',
+    password: ''
+  }),
+  methods: {
+    async onSubmit() {
+      try {
+        await this.$store.dispatch('auth/login', {
+          email: this.email,
+          password: this.password
+        })
+      } catch (e) {
+      }
+    }
+
+  },
+  computed: {
+    showMessage() {
+      return this.$store.state.auth.error ? message[this.$store.state.auth.error] : null
+    }
+  }
+}
+</script>
+
+

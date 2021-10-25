@@ -1,0 +1,76 @@
+.auth
+  &__form
+    margin 90rem 0 40rem
+    @media $mobile
+      margin-top 45rem
+
+  &__suptitle
+    margin 80rem 0
+    font-size 80rem
+    line-height 109rem
+    color $primary
+    text-align center
+    border-bottom 2rem solid $primary
+    @media $mobile
+      font-size 30rem
+      line-height 50rem
+
+.form
+  width 450rem
+  padding 10rem
+  @media $mobile
+    width 100%
+
+  &__control
+    width 100%
+    display flex
+    flex-direction column
+    margin-bottom 40rem
+
+  &__label
+    font-family $ep
+    font-size 17rem
+    font-weight 500
+    line-height 27rem
+    color $primary
+
+  &__input
+    font-size 19rem
+    line-height 29rem
+    color $primary
+    border-bottom 2px solid rgba($gray, .5)
+    padding 9rem 20rem
+    transition border-bottom-color .5s ease
+
+    &:focus
+      border-color rgba($gray, 1)
+
+  &__error
+    text-transform uppercase
+    text-align right
+    display block
+    margin-top 6rem
+    font-size 18rem
+    line-height 27rem
+    color red
+    transition opacity .5s ease
+    opacity 0
+
+    &.error
+      opacity 1
+
+  &__btn
+    width 100%
+    padding 9rem 18rem
+    border 1px solid $primary
+    margin-top 33rem
+    font-size 17rem
+    line-height 17rem
+    font-family $ep
+    font-weight 600
+    color $primary
+    background-color transparent
+    transition background-color .5s ease
+
+    &:hover
+      background-color #f5f5f5
