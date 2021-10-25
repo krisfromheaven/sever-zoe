@@ -17,7 +17,7 @@
           li.footer__nav-item
             router-link(to='/' ) Art pieces all over the world
           li.footer__nav-item
-            router-link(to='/' ) Contacts
+            router-link(to='/contact' ) Contacts
       span.footer__copy  Zoe Sever, 2021 / All rights reserved
     button.footer__btn(type='button' @click.prevent='$router.push("/auth")')
       Logo.footer__logo

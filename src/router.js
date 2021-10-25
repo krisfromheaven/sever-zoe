@@ -23,6 +23,11 @@ let routes = [
     name: 'Auth'
   },
   {
+    path: '/contact',
+    component: () => import('./views/Contact'),
+    name: 'Contact'
+  },
+  {
     path: '*',
     component: About
   }

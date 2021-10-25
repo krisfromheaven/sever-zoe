@@ -3,7 +3,7 @@
     Header
     .main__content
       transition(name="fade" mode="out-in")
-        RouterView
+        RouterView(:routeName='routeName')
     Footer
 </template>
 
@@ -16,6 +16,18 @@ export default {
   components: {
     Header,
     Footer
+  },
+  computed: {
+    routeName() {
+      return this.$route.name !== undefined ? this.$route.name : this.$route
+    }
+  },
+  watch: {
+    routeName() {
+      if (this.$route.name !== 'Auth') {
+        this.$store.commit('common/BURGER_TOGGLE')
+      }
+    }
   }
 }
 </script>

@@ -25,6 +25,9 @@ export default {
     email: '',
     password: ''
   }),
+  beforeDestroy() {
+    this.$store.commit('auth/CLEAR_ERROR')
+  },
   methods: {
     async onSubmit() {
       try {
@@ -35,7 +38,6 @@ export default {
       } catch (e) {
       }
     }
-
   },
   computed: {
     showMessage() {

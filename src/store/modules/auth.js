@@ -34,7 +34,6 @@ export default {
         await firebase.auth().signInWithEmailAndPassword(email, password)
         commit('CLEAR_ERROR')
       } catch (err) {
-        console.log(err.code)
         commit('SET_ERROR', err.code)
         throw new Error(err)
       }

@@ -3,7 +3,7 @@
     .container
       span.header__logo Zoe Sever
       nav(:class='["header__nav", {open: $store.state.common.burgerIsOpen }]')
-        ul.header__nav-list
+        ul.header__nav-list(:class='{mobile: $store.state.common.mobile}')
           li.header__nav-item
             router-link(to='/' ) About
           li.header__nav-item
@@ -13,7 +13,7 @@
           li.header__nav-item
             router-link(to='/' ) Art pieces all over the world
           li.header__nav-item
-            router-link(to='/' ) Contacts
+            router-link(to='/contact' ) Contacts
           li.header__nav-item
             a(
               href='#'
@@ -22,7 +22,7 @@
             ) Logout
       button(
         type='button'
-        :class='["burger__btn", {open: $store.state.common.burgerIsOpen }, {dark: this.$route.name === String("About")}]'
+        :class='["burger__btn", {open: $store.state.common.burgerIsOpen }, {dark: isHero}]'
         v-if='$store.state.common.mobile'
         @click.prevent='$store.commit("common/BURGER_TOGGLE")'
       )
@@ -42,8 +42,9 @@ export default {
       burgerIsOpen: s => s.common.burgerIsOpen
     }),
     isHero() {
-      return this.$route.name === String('About') && !this.$store.state.common.mobile
-    }
+      return this.$route.name === String('About')
+    },
+
   },
   methods: {
     async logout() {
@@ -56,9 +57,9 @@ export default {
     },
     '$screen.width'() {
       if (this.burgerIsOpen) {
-        this.$store.commit('common/BURGER_TOGGLE')
+        this.$store.state.common.burgerIsOpen = false
       }
-    }
+    },
   }
 }
 </script>
