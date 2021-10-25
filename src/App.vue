@@ -24,8 +24,9 @@ export default {
   },
   watch: {
     routeName() {
-      if (this.$route.name !== 'Auth') {
-        this.$store.commit('common/BURGER_TOGGLE')
+      if (this.$route.name !== 'Auth' && this.$store.state.common.mobile) {
+        // this.$store.commit('common/BURGER_TOGGLE')
+        this.$store.state.common.burgerIsOpen = false
       }
     }
   }
