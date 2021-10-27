@@ -1,0 +1,67 @@
+.gallery
+  padding-bottom 125rem
+  &__title-wrapper
+    display flex
+    align-items flex-end
+    justify-content space-between
+  &__add
+    padding-bottom 5rem
+    font-family $ep
+    font-size 17rem
+    font-weight 600
+    color $primary
+    border-bottom 1px solid $primary
+  &__list
+    margin-top 120rem
+    display flex
+    flex-wrap wrap
+
+  &__item
+    display block
+    width calc(100% / 4)
+    @media $mobile
+      width 100%
+
+    &-wrapper
+      padding 20rem
+      border 1px solid $second
+      transition border-color .4s ease
+      cursor pointer
+
+      &:hover
+        border-color $primary
+
+    &-img
+      height 250rem
+      width 100%
+      display block
+
+    &-info
+      margin-top 20rem
+      display flex
+      align-items center
+
+
+    &-num
+      margin-left 10rem
+      font-size 22rem
+      line-height 28rem
+      font-weight 700
+      color $primary
+
+    &-description
+      padding-left 19rem
+
+    &-name
+      font-family $ep
+      font-size 17rem
+      line-height 27rem
+      font-weight 500
+      color $primary
+
+    &-text
+      font-family $ep
+      font-size 17rem
+      line-height 22rem
+      color $gray
+      font-style italic

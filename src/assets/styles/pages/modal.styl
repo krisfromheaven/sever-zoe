@@ -1,0 +1,129 @@
+.modal
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  z-index 10
+  height 100%
+  width 100%
+  background rgba(39, 39, 39, 0.4)
+  display flex
+  align-items center
+  justify-content center
+  overflow-y auto
+
+  &__wrapper
+    background-color #fff
+    position relative
+    width 100%
+    max-width 1400rem
+    @media $mobile
+      height 100%
+      overflow-y scroll
+
+
+  &__close
+    position absolute
+    top 20rem
+    right 20rem
+    font-size 35rem
+    color rgba($primary, 0.4)
+
+
+  &__form
+    display flex
+    margin 72rem 65rem
+    @media $mobile
+      flex-direction column
+      margin 60rem 20rem 30rem
+
+
+    &-control
+      margin 0 61rem 40rem
+      display flex
+      flex-direction column
+      position relative
+      @media $mobile
+        margin 0 0 30rem
+
+      &:after
+        content ''
+        width 100%
+        height 1rem
+        background-color rgba($primary, 0.4)
+        position absolute
+        bottom 0
+        left 0
+
+
+      & > label
+        font-family $ep
+        font-size 17rem
+        font-weight 500rem
+        color rgba($primary, 0.4)
+
+      & > input
+        font-size 17rem
+        font-weight 400
+        color $primary
+        height 45rem
+        padding 4rem 6rem
+
+        @media $mobile
+          height 30rem
+
+  &__buttons
+    margin 0 61rem
+    display flex
+    justify-content space-between
+    align-items center
+    @media $mobile
+      margin 40rem 0 10rem
+
+    &-btn
+      font-family $ep
+      font-size 17rem
+      font-weight 600
+      color rgba($primary, 0.4)
+      border-bottom 1px solid rgba($primary, 0)
+      transition border-bottom-color .4s ease, color .4s ease
+
+      &:hover
+        border-bottom-color rgba($primary, 1)
+        color rgba($primary, 1)
+
+  &__col
+    width 50%
+    @media $mobile
+      width 100%
+      padding 20rem 0
+
+  &__upload
+    width 100%
+    height 100%
+
+    background-color rgba($gray, 0.07)
+    display flex
+    align-items center
+    justify-content center
+    cursor pointer
+
+    & > img
+      width 182rem
+      @media $mobile
+        width 100rem
+
+    & > input
+      visibility hidden
+      opacity 0
+      display none
+
+    &-preview
+      height 100%
+      width 100%
+
+    &-line
+      transition width .4s ease
+      height 20rem
+      background linear-gradient(90deg, rgba(121,25,9,1) 39%, rgba(0,255,104,1) 100%)

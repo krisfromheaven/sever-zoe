@@ -11,7 +11,7 @@
           li.footer__nav-item
             router-link(to='/' ) About
           li.footer__nav-item
-            router-link(to='/' ) Gallery
+            router-link(to='/gallery' ) Gallery
           li.footer__nav-item
             router-link(to='/' ) Exhibitions
           li.footer__nav-item

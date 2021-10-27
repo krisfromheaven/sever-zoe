@@ -2,11 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import firebase from 'firebase/compat/app'
 import  'firebase/compat/auth'
-
+import 'firebase/compat/storage'
+import 'firebase/compat/database'
 import store from './store/index'
 import router from './router'
 import VueScreen from 'vue-screen'
-import Router from 'vue-router'
+
 
 Vue.use(VueScreen)
 Vue.config.productionTip = false
@@ -19,7 +20,8 @@ firebase.initializeApp({
   projectId: 'zoe-sever-gallery',
   storageBucket: 'zoe-sever-gallery.appspot.com',
   messagingSenderId: '1072606766324',
-  appId: '1:1072606766324:web:d891197d2a749738812aa1'
+  appId: '1:1072606766324:web:d891197d2a749738812aa1',
+  databaseURL: 'zoe-sever-gallery-default-rtdb.europe-west1.firebasedatabase.app'
 })
 
 firebase.auth().onAuthStateChanged(user => {

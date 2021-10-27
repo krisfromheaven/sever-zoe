@@ -11,7 +11,7 @@
         .form__control
           label.form__label(for='password') Password
           input.form__input(type='password' id='password' v-model='password' )
-        button.form__btn.btn(type='submit') Log in
+        button.form__btn.btn(type='submit' :disabled='email.length && !password.length') Log in
         span.form__error(:class='{error: $store.state.auth.error}' ) {{ showMessage }}
 
 </template>
@@ -32,8 +32,8 @@ export default {
     async onSubmit() {
       try {
         await this.$store.dispatch('auth/login', {
-          email: this.email,
-          password: this.password
+          email: this.email.trim(),
+          password: this.password.trim()
         })
       } catch (e) {
       }

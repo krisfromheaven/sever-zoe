@@ -33,20 +33,14 @@ export default {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
         commit('CLEAR_ERROR')
-      } catch (err) {
-        commit('SET_ERROR', err.code)
-        throw new Error(err)
+      } catch (e) {
+        commit('SET_ERROR', e.code)
+        throw e
       }
     },
-    async logout({commit}) {
+    async logout({ commit }) {
       await firebase.auth().signOut()
       commit('CLEAR_USER_DATA')
     }
-  },
-  getters: {
-    user(state) {
-      return state.user
-    }
   }
-
 }

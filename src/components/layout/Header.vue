@@ -7,7 +7,7 @@
           li.header__nav-item
             router-link(to='/' ) About
           li.header__nav-item
-            router-link(to='/' ) Gallery
+            router-link(to='/gallery' ) Gallery
           li.header__nav-item
             router-link(to='/' ) Exhibitions
           li.header__nav-item

@@ -28,6 +28,11 @@ let routes = [
     name: 'Contact'
   },
   {
+    path:'/gallery',
+    component: () => import('./views/Gallery'),
+    name: 'Gallery'
+  },
+  {
     path: '*',
     component: About
   }
