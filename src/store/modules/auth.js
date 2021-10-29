@@ -42,5 +42,9 @@ export default {
       await firebase.auth().signOut()
       commit('CLEAR_USER_DATA')
     }
+  },
+  getUid() {
+    const user = firebase.auth().currentUser
+    return user ? user.uid : null
   }
 }

@@ -17,35 +17,68 @@
     background-color #fff
     position relative
     width 100%
-    max-width 1400rem
+    max-width 1200rem
     @media $mobile
       height 100%
       overflow-y scroll
 
 
   &__close
+    height 40rem
+    width 40rem
     position absolute
-    top 20rem
-    right 20rem
-    font-size 35rem
-    color rgba($primary, 0.4)
+    top 40rem
+    right 40rem
+    font-size 25rem
+    color #fff
+    background-color #000
+    opacity 1
+    transition opacity 0.5s ease
+    z-index 2
+
+    @media $mobile
+      height 30rem
+      width 30rem
+      font-size 20rem
+      right 20rem
+
+    &:disabled
+      opacity 0.5
 
 
   &__form
     display flex
-    margin 72rem 65rem
+    flex-direction column
+    align-items center
+    justify-content space-between
+    margin 40rem
     @media $mobile
       flex-direction column
-      margin 60rem 20rem 30rem
+      margin 20rem
 
+    &-uploaded
+      font-size 40rem
+      position relative
+      border-bottom 1px solid $primary
+      @media $mobile
+        font-size 30rem
+
+      &:after
+        content ''
+        width 40rem
+        height 40rem
+        position absolute
+        top 10rem
+        left -70rem
+        background url('./assets/img/tick.png') center / contain no-repeat
+        @media $mobile
+          display none
 
     &-control
-      margin 0 61rem 40rem
       display flex
       flex-direction column
       position relative
-      @media $mobile
-        margin 0 0 30rem
+      margin 30rem 0
 
       &:after
         content ''
@@ -79,7 +112,7 @@
     justify-content space-between
     align-items center
     @media $mobile
-      margin 40rem 0 10rem
+      margin 40rem 20rem 10rem
 
     &-btn
       font-family $ep
@@ -93,37 +126,55 @@
         border-bottom-color rgba($primary, 1)
         color rgba($primary, 1)
 
-  &__col
-    width 50%
+      &:disabled:hover
+        color rgba($primary, 0.4)
+        border-bottom 1px solid rgba($primary, 0)
+
+  &__row
+    width 100%
     @media $mobile
-      width 100%
       padding 20rem 0
 
   &__upload
-    width 100%
-    height 100%
-
+    height 450rem
     background-color rgba($gray, 0.07)
     display flex
     align-items center
     justify-content center
     cursor pointer
+    position relative
+    overflow hidden
 
-    & > img
-      width 182rem
-      @media $mobile
-        width 100rem
+    @media $mobile
+      height 200rem
 
     & > input
       visibility hidden
       opacity 0
       display none
 
+    &-complete
+      width 200rem
+      @media $mobile
+        width 100rem
+
     &-preview
-      height 100%
+      overflow hidden
+      position relative
+
+    &-img
+      height auto
       width 100%
+      object-fit cover
+
 
     &-line
-      transition width .4s ease
-      height 20rem
-      background linear-gradient(90deg, rgba(121,25,9,1) 39%, rgba(0,255,104,1) 100%)
+      height 8rem
+      background rgba(0, 255, 104, 1)
+      position absolute
+      top 0
+      left 0
+
+    &-error
+      font-size 17rem
+      color red

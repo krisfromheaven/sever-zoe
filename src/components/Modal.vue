@@ -1,78 +1,110 @@
 <template lang='pug'>
-  section.modal
+  section.modal(ref='modal' )
     .modal__wrapper
       button.modal__close(
         type='button'
-        @click.prevent='$emit("close")'
+        @click.prevent='preview = null'
+        v-if='preview !== null && !post'
+        title='clear preview'
+        :disabled='$store.state.gallery.percent < 99 && $store.state.gallery.percent  > 1'
       ) &#10006;
-      .modal__upload-line(:style='{"width": $store.state.gallery.percentage + "%"}')
       form.modal__form(@submit.prevent='onSubmit')
-        .modal__col
+        .modal__upload-line(:style='{"width": $store.state.gallery.percent + "%"}')
+        .modal__row
           label.modal__upload
-            input(type='file' @change='previewImage' accept='image/*' required)
-            .modal__upload-preview(v-if='imgSrc !== null')
-              img.modal__upload-preview(:src='imgSrc')
-            img(v-else src='@/assets/img/input-button-img.png' alt='zs-add')
-        .modal__col
+            input(type='file' @change.prevent='previewImage' accept='image/*' required :disabled='post')
+            .modal__upload-preview(v-if='preview !== null')
+              img.modal__upload-img(:src='preview')
+            img.modal__upload-complete(v-else src='@/assets/img/input-button-img.png' alt='zs-add')
+        .modal__row
           .modal__form-control
-            label(for='number') Number
-            input(type='text' id='number' required v-model='number' )
-          .modal__form-control
-            label(for='name') Name
-            input(type='text' id='name' required v-model='name' )
-          .modal__form-control
-            label(for='technique') Technique
-            input(type='text' id='technique' required v-model='technique' )
-          .modal__form-control
-            label(for='size') Size
-            input(type='text' id='size' required v-model='size' )
+            input(type='text'
+              v-model.trim='description'
+              placeholder='type a description'
+            )
           .modal__buttons
             button.modal__buttons-btn(
               type='button'
               @click.prevent='$emit("close")'
             ) Cancel
             button.modal__buttons-btn(
+              type='button'
+              @click.prevent='editPost(post)'
+              :disabled='!preview'
+              v-if='post'
+            ) Edit
+            button.modal__buttons-btn(
               type='submit'
-              :disabled='$store.state.gallery.percentage > 0'
+              v-else-if='!uploading && !post'
+              :disabled='!preview'
             ) Save
+            button.modal__buttons-btn(
+              type='button'
+              v-else
+              @click.prevent='clearForm'
+              :disabled='$store.state.gallery.percent < 100'
+            ) Clear form
+
 
 </template>
 
 <script>
+import { v4 } from 'uuid'
 
 export default {
   name: 'modal',
   data: () => ({
-    imgData: null,
-    imgSrc: null,
-    number: '',
-    name: '',
-    technique: '',
-    size: ''
+    image: null,
+    preview: null,
+    description: null,
+    uploading: false
   }),
-  methods: {
-    async onSubmit() {
-      // await this.$store.dispatch('gallery/uploadImage', this.imgData)
-      await this.$store.dispatch('gallery/uploadInfo', {
-        number: this.number.trim(),
-        name: this.name.trim(),
-        technique: this.technique.trim(),
-        size: this.size.trim(),
-
-      })
-      this.number = this.name = this.technique = this.size = ''
-    },
-
-    previewImage(e) {
-      let file = this.imgData = e.target.files[0]
-      const reader = new FileReader()
-
-      reader.onload = ev => {
-        this.imgSrc = ev.target.result
+  props: ['post'],
+  mounted() {
+    this.updatePost(this.post)
+    document.addEventListener('click', e => {
+      if (e.target === this.$refs.modal) {
+        this.$emit('close')
       }
-      reader.readAsDataURL(file)
-    }
+    })
   },
+  beforeDestroy() {
+    this.clearForm()
+  },
+  methods: {
+    previewImage(e) {
+      const file = this.image = e.target.files[0]
+      this.preview = URL.createObjectURL(file)
+    },
+    async onSubmit() {
+      this.uploading = true
+      await this.$store.dispatch('gallery/uploadData', {
+        img: this.image,
+        description: this.description,
+        id: v4()
+      })
+    },
+    clearForm() {
+      this.$store.commit('gallery/CLEAR_PERCENT')
+      this.image = this.preview = this.description = null
+      this.uploading = false
+    },
+    updatePost(post) {
+      if (post) {
+        this.preview = post.image
+        this.description = post.description ? post.description : post.title
+      }
+    },
+    async editPost(post) {
+      this.post = post
+      await this.$store.dispatch('gallery/editPost', {
+        ...post,
+        description: this.description
+      })
+      this.description = null
+    }
+  }
 
 }
 </script>
+

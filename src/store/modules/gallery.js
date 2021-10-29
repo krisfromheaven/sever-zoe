@@ -4,72 +4,79 @@ import firebase from 'firebase/compat/app'
 export default {
   namespaced: true,
   state: {
-    storage: [],
-    percentage: 0,
-    url: ''
+    gallery: [],
+    percent: 0,
+    url: null
   },
   mutations: {
-    GET_STORAGE(state, url) {
-      state.storage.push(url)
+    SET_GALLERY(state, data) {
+      state.gallery.push(Object.keys(data).map(key => ({ ...data[key], path: key }))[0])
     },
-    SET_PERCENTAGE(state, data) {
-      state.percentage = data
+    SET_PERCENT(state, data) {
+      state.percent = data
     },
-    CLEAR_PERCENTAGE(state) {
-      state.percentage = 0
+    CLEAR_PERCENT(state) {
+      state.percent = 0
     },
-    SET_URL(state, url) {
-      state.url = url
-    },
-    CLEAR_URL(state) {
-      state.url = ''
+    UPDATE_POST(state, item) {
+
     }
   },
   actions: {
-    // async fetchStorage({ commit }) {
-    //   try {
-    //     let storage = (await firebase.storage().ref('images').listAll()) || {}
-    //     let images = storage.items
-    //     images.forEach(img => {
-    //       img.getDownloadURL()
-    //         .then(url => {
-    //           commit('GET_STORAGE', Object({ 'img': url }))
-    //         })
-    //         .catch(err => console.log(err))
-    //     })
-    //   } catch (e) {
-    //     throw e
-    //   }
-    // },
-
-    async uploadImage({ commit }, file) {
+    async fetchGallery({ commit }) {
       try {
-        const ref = (await firebase.storage().ref(`/images/${file.name}`)) || {}
-        const task = ref.put(file)
-
-        task.on('state_changed', snapshot => {
-          const percentage = +(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          commit('SET_PERCENTAGE', percentage.toFixed())
+        const database = await firebase.database().ref('gallery') || {}
+        database.on('value', snapshot => {
+          snapshot.forEach(el => {
+            commit('SET_GALLERY', el.val())
+          })
+        })
+      } catch (e) {
+        throw e
+      }
+    },
+    async uploadData({ dispatch, commit, state }, { img, description, id }) {
+      try {
+        const refStorage = await firebase.storage().ref(`/images/${img.name}`)
+        const taskStorage = refStorage.put(img)
+        taskStorage.on(`state_changed`, snapshot => {
+          let percent = +(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          commit('SET_PERCENT', percent)
         }, e => {
           throw e
         }, () => {
-          commit('CLEAR_PERCENTAGE')
-          commit('CLEAR_URL')
-          task.snapshot.ref.getDownloadURL()
+          taskStorage.snapshot.ref.getDownloadURL()
             .then(url => {
-              commit('SET_URL', url)
+              firebase.database().ref(`gallery/${id}`).push({
+                image: url,
+                description,
+                title: img.name.toString().split('.')[0],
+                id
+              })
             })
         })
       } catch (e) {
         throw e
       }
     },
-
-    async uploadInfo({ state }, data) {
+    async deletePost({ state }, id) {
       try {
-        const ref = await firebase.database().ref(`gallery`)
-        ref.push({ ...data })
-          .then(res => console.log(res))
+        await firebase.database().ref(`gallery/${id}`).remove(() => {
+          state.gallery = state.gallery.filter(r => r.id !== id)
+        })
+      } catch (e) {
+        throw e
+      }
+    },
+
+    async editPost({ state }, { description, path, id }) {
+      try {
+        let ref = await firebase.database().ref(`gallery/${id}`).child(path)
+        ref.update({ description })
+        state.percent = 100
+        state.gallery.find(r => r.id === id).description = description
+
+
       } catch (e) {
         throw e
       }

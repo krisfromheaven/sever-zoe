@@ -1,17 +1,25 @@
 import Vue from 'vue'
 import App from './App.vue'
-import firebase from 'firebase/compat/app'
-import  'firebase/compat/auth'
-import 'firebase/compat/storage'
-import 'firebase/compat/database'
 import store from './store/index'
 import router from './router'
 import VueScreen from 'vue-screen'
 
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
+import 'firebase/compat/storage'
+import 'firebase/compat/database'
 
+import VueLazyload from 'vue-lazyload'
+
+const loadimage = require('./assets/img/loading.gif')
+
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  loading: loadimage,
+  attempt: 1
+})
 Vue.use(VueScreen)
 Vue.config.productionTip = false
-
 
 
 firebase.initializeApp({
