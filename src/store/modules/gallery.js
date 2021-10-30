@@ -4,37 +4,27 @@ import firebase from 'firebase/compat/app'
 export default {
   namespaced: true,
   state: {
-    gallery: [],
     percent: 0,
     url: null
   },
   mutations: {
-    SET_GALLERY(state, data) {
-      state.gallery.push(Object.keys(data).map(key => ({ ...data[key], path: key }))[0])
-    },
     SET_PERCENT(state, data) {
       state.percent = data
     },
     CLEAR_PERCENT(state) {
       state.percent = 0
-    },
-    UPDATE_POST(state, item) {
-
     }
   },
   actions: {
-    async fetchGallery({ commit }) {
+    async fetchGallery() {
       try {
-        const database = await firebase.database().ref('gallery') || {}
-        database.on('value', snapshot => {
-          snapshot.forEach(el => {
-            commit('SET_GALLERY', el.val())
-          })
-        })
+        const database = (await firebase.database().ref('gallery').once('value')).val() || {}
+        return Object.keys(database).map(key => ({ ...database[key], id: key }))
       } catch (e) {
         throw e
       }
     },
+
     async uploadData({ dispatch, commit, state }, { img, description, id }) {
       try {
         const refStorage = await firebase.storage().ref(`/images/${img.name}`)
@@ -47,11 +37,10 @@ export default {
         }, () => {
           taskStorage.snapshot.ref.getDownloadURL()
             .then(url => {
-              firebase.database().ref(`gallery/${id}`).push({
+              firebase.database().ref(`gallery`).push({
                 image: url,
                 description,
-                title: img.name.toString().split('.')[0],
-                id
+                title: img.name.toString().split('.')[0]
               })
             })
         })
@@ -61,22 +50,17 @@ export default {
     },
     async deletePost({ state }, id) {
       try {
-        await firebase.database().ref(`gallery/${id}`).remove(() => {
-          state.gallery = state.gallery.filter(r => r.id !== id)
-        })
+        await firebase.database().ref(`gallery/${id}`).remove()
       } catch (e) {
         throw e
       }
     },
 
-    async editPost({ state }, { description, path, id }) {
+    async editPost({ state }, { description, id }) {
       try {
-        let ref = await firebase.database().ref(`gallery/${id}`).child(path)
+        let ref = await firebase.database().ref('gallery').child(id)
         ref.update({ description })
         state.percent = 100
-        state.gallery.find(r => r.id === id).description = description
-
-
       } catch (e) {
         throw e
       }

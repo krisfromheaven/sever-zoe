@@ -1,5 +1,18 @@
 .gallery
   padding-bottom 125rem
+  overflow hidden
+  &__up
+    height 35rem
+    width 35rem
+    position fixed
+    bottom 80rem
+    right 25rem
+    z-index 1
+    background url("./assets/img/arrow.png") center/contain no-repeat
+    transform rotate(-90deg)
+    filter invert(1) brightness(50%)
+    opacity 0
+    visibility hidden
 
   &__title-wrapper
     display flex
@@ -32,43 +45,41 @@
     margin-top 120rem
     display flex
     flex-wrap wrap
-    background $second
-
 
   &__item
     border 1px solid $gray
-    opacity 0
-    transition opacity .3s ease
+    overflow hidden
     width calc(100% / 4)
     @media $mobile
       width 100%
 
     &-wrapper
+      height 350rem
       margin 2rem
       border 1px solid $second
       cursor pointer
-      height 350rem
       position relative
-      overflow hidden
       display flex
       align-items center
       justify-content center
-
-      & > img
-        width 100%
-        transform scale(2)
-        transition transform 1s ease
-
+      background-position center
+      background-size cover
+      background-repeat no-repeat
+      transition background-position 1s ease
 
       @media $mobile
         height 250rem
 
-      &:hover > img
-        transition transform 15s ease
-        transform scale(1)
+      &:hover
+        transition background-position 15s ease
+        background-position 80% 80%
+
 
       &:hover .gallery__item-text
         transform translateY(0)
+
+      &:hover .gallery__item-delete
+        opacity 1
 
     &-delete
       height 50rem
@@ -80,13 +91,15 @@
       z-index 2
       color $second
       font-size 30rem
+      opacity 0
+      transition opacity 1s ease
 
       &.edit
         top 55rem
+
         & > svg
           height 19rem
           width 19rem
-
 
 
     &-text
@@ -109,8 +122,8 @@
         font-size 19rem
         line-height 24rem
 
-.gallery__item[visible]
-  opacity 1
-
-.gallery__item:nth-child(-n+8)
-  opacity 1
+//.gallery__item[visible]
+//  opacity 1
+//
+//.gallery__item:nth-child(-n+8)
+//  opacity 1

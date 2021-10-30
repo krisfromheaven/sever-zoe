@@ -10,6 +10,7 @@
 <script>
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
+import { qs } from './helpers'
 
 
 export default {
@@ -28,6 +29,11 @@ export default {
         this.$store.state.common.burgerIsOpen = false
       }
     }
+  },
+  created() {
+    qs('body').addEventListener('contextmenu', function(e) {
+      e.preventDefault()
+    })
   }
 }
 </script>

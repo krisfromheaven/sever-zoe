@@ -11,7 +11,7 @@
           li.header__nav-item
             router-link(to='/' ) Exhibitions
           li.header__nav-item
-            router-link(to='/' ) Art pieces all over the world
+            router-link(to='/world' ) Art pieces all over the world
           li.header__nav-item
             router-link(to='/contact' ) Contacts
           li.header__nav-item

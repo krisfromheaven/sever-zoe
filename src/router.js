@@ -28,9 +28,14 @@ let routes = [
     name: 'Contact'
   },
   {
-    path:'/gallery',
+    path: '/gallery',
     component: () => import('./views/Gallery'),
     name: 'Gallery'
+  },
+  {
+    path: '/world',
+    component: () => import('./views/World'),
+    name: 'World'
   },
   {
     path: '*',

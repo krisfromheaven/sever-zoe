@@ -16,14 +16,7 @@
 
 <script>
 
-import { qs } from '../helpers'
-
 export default {
   name: 'About',
-  created() {
-    qs('body').addEventListener('contextmenu', function(e) {
-      e.preventDefault()
-    })
-  }
 }
 </script>

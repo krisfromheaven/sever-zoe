@@ -15,7 +15,7 @@
           li.footer__nav-item
             router-link(to='/' ) Exhibitions
           li.footer__nav-item
-            router-link(to='/' ) Art pieces all over the world
+            router-link(to='/world' ) Art pieces all over the world
           li.footer__nav-item
             router-link(to='/contact' ) Contacts
       span.footer__copy  Zoe Sever, 2021 / All rights reserved

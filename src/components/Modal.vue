@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { v4 } from 'uuid'
+
 
 export default {
   name: 'modal',
@@ -69,19 +69,22 @@ export default {
     })
   },
   beforeDestroy() {
+    this.$emit('refresh')
     this.clearForm()
   },
   methods: {
     previewImage(e) {
+      if (!e) {
+        return
+      }
       const file = this.image = e.target.files[0]
-      this.preview = URL.createObjectURL(file)
+      this.preview = file ? URL.createObjectURL(file) : null
     },
     async onSubmit() {
       this.uploading = true
       await this.$store.dispatch('gallery/uploadData', {
         img: this.image,
-        description: this.description,
-        id: v4()
+        description: this.description
       })
     },
     clearForm() {
