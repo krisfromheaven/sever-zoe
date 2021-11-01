@@ -3,7 +3,11 @@
     .container
       .exhibitions__title-wrapper
         h1.title.exhibitions__title  Exhibitions
-        button.exhibitions__button(type='button' @click='showForm = !showForm' v-if='this.$store.state.auth.user.loggedIn' ) + add item
+        button.exhibitions__button(
+          type='button'
+          @click='showForm = !showForm'
+          v-if='this.$store.state.auth.user.loggedIn'
+        ) + Add new item
       exhibitionsForm(@onSubmit='onSubmit' v-if='this.$store.state.auth.user.loggedIn && showForm' )
       .exhibitions__category
         button.exhibitions__category-item(
