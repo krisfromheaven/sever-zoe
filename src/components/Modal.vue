@@ -6,13 +6,19 @@
         @click.prevent='preview = null'
         v-if='preview !== null && !post'
         title='clear preview'
-        :disabled='$store.state.gallery.percent < 99 && $store.state.gallery.percent  > 1'
+        :disabled='percent < 99 && percent  > 1'
       ) &#10006;
       form.modal__form(@submit.prevent='onSubmit')
-        .modal__upload-line(:style='{"width": $store.state.gallery.percent + "%"}')
+        .modal__upload-line(:style='{"width": percent + "%"}')
         .modal__row
           label.modal__upload
-            input(type='file' @change.prevent='previewImage' accept='image/*' required :disabled='post')
+            input(
+              type='file'
+              @change.prevent='previewImage'
+              accept='image/*'
+              required
+              :disabled='post'
+            )
             .modal__upload-preview(v-if='preview !== null')
               img.modal__upload-img(:src='preview')
             img.modal__upload-complete(v-else src='@/assets/img/input-button-img.png' alt='zs-add')
@@ -42,7 +48,7 @@
               type='button'
               v-else
               @click.prevent='clearForm'
-              :disabled='$store.state.gallery.percent < 100'
+              :disabled='percent < 100'
             ) Clear form
 
 
@@ -50,18 +56,20 @@
 
 <script>
 
+import { mapState } from 'vuex'
 
 export default {
   name: 'modal',
   data: () => ({
-    image: null,
     preview: null,
+    image: null,
     description: null,
     uploading: false
   }),
   props: ['post'],
+
   mounted() {
-    this.updatePost(this.post)
+    this.updatePreviewPost(this.post)
     document.addEventListener('click', e => {
       if (e.target === this.$refs.modal) {
         this.$emit('close')
@@ -72,17 +80,20 @@ export default {
     this.$emit('refresh')
     this.clearForm()
   },
+  computed: {
+    ...mapState({ percent: s => s.gallery.percent })
+  },
   methods: {
     previewImage(e) {
       if (!e) {
         return
       }
-      const file = this.image = e.target.files[0]
+      let file = this.image = e.target.files[0]
       this.preview = file ? URL.createObjectURL(file) : null
     },
-    async onSubmit() {
+    onSubmit() {
       this.uploading = true
-      await this.$store.dispatch('gallery/uploadData', {
+      this.$emit('onSubmit', {
         img: this.image,
         description: this.description
       })
@@ -92,22 +103,30 @@ export default {
       this.image = this.preview = this.description = null
       this.uploading = false
     },
-    updatePost(post) {
+    editPost(post) {
+      this.$emit('editPost', {
+        ...post,
+        title: this.description
+      })
+    },
+    updatePreviewPost(post) {
       if (post) {
         this.preview = post.image
         this.description = post.description ? post.description : post.title
       }
     },
-    async editPost(post) {
-      this.post = post
-      await this.$store.dispatch('gallery/editPost', {
-        ...post,
-        description: this.description
-      })
-      this.description = null
+    openUpdatePost(post) {
+      if (post) {
+        this.visible = true
+        this.post = post
+      }
+    }
+  },
+  visible() {
+    if (this.percent === 100) {
+      this.$store.commit('gallery/CLEAR_PERCENT')
     }
   }
-
 }
 </script>
 

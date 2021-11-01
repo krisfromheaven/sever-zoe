@@ -10,7 +10,13 @@
       @prevSlide='prevSlide'
     )
     transition(name='fade' v-if='visible' )
-      Modal(@close='addNewItem' :post='post' @refresh="refresh")
+      Modal(
+        @close='addNewItem'
+        @refresh="refresh"
+        :post='post'
+        @onSubmit='onSubmit'
+        @editPost='editPost'
+      )
     .container
       .gallery__title-wrapper
         h1.title.gallery__title Gallery
@@ -24,14 +30,18 @@
           v-for='(item,i) in gallery'
           :key='i'
         )
-          .gallery__item-wrapper(ref='item' @click.prevent='showSlide(item, i,$event)' v-lazy:background-image='item.image')
+          .gallery__item-wrapper(
+            ref='item'
+            @click.prevent='showSlide(item, i,$event)'
+            v-lazy:background-image='item.image'
+          )
             button.gallery__item-delete(
               v-if='$store.state.auth.user.loggedIn'
               @click.prevent='deletePost(item.id)'
             ) &#10006;
             button.gallery__item-delete.edit(
               v-if='$store.state.auth.user.loggedIn'
-              @click.prevent='editPost(item)'
+              @click.prevent='openUpdatePost(item)'
             )
               Edit
             .gallery__item-text {{ item.description ? item.description : item.title }}
@@ -40,7 +50,7 @@
 
 <script>
 import Modal from '../components/Modal'
-import {  qs } from '../helpers'
+import { qs } from '../helpers'
 import Edit from '../assets/img/edit.svg'
 import GallerySlider from '../components/GallerySlider'
 
@@ -58,6 +68,9 @@ export default {
   async mounted() {
     await this.refresh()
     document.addEventListener('scroll', () => {
+      if (!qs('.gallery__up')) {
+        return
+      }
       if (window.pageYOffset > window.innerHeight) {
         qs('.gallery__up').style.opacity = '1'
         qs('.gallery__up').style.visibility = 'visible'
@@ -67,6 +80,7 @@ export default {
       }
     })
   },
+
   methods: {
     scrollUp() {
       window.scrollTo({
@@ -96,7 +110,7 @@ export default {
       }
     },
     async refresh() {
-      this.gallery = await this.$store.dispatch('gallery/fetchGallery')
+      this.gallery = await this.$store.dispatch('gallery/fetchGallery', { path: this.$route.path })
     },
     addNewItem() {
       this.visible = !this.visible
@@ -108,23 +122,24 @@ export default {
     },
     async deletePost(id) {
       if (id) {
-        await this.$store.dispatch('gallery/deletePost', id)
+        await this.$store.dispatch('gallery/deletePost', { id, path: this.$route.path })
         await this.refresh()
       }
     },
-    editPost(post) {
+    openUpdatePost(post) {
       if (post) {
         this.visible = true
         this.post = post
       }
+    },
+    async onSubmit(data) {
+      await this.$store.dispatch('gallery/uploadData', { ...data, path: this.$route.path })
+    },
+    async editPost(post) {
+      await this.$store.dispatch('gallery/editPost', { ...post, path: this.$route.path })
     }
   },
   watch: {
-    visible() {
-      if (this.$store.state.gallery.percent === 100) {
-        this.$store.commit('gallery/CLEAR_PERCENT')
-      }
-    },
     isSlider(val) {
       val ? qs('body').style.overflow = 'hidden' : qs('body').style.overflow = ''
     }

@@ -16,16 +16,16 @@ export default {
     }
   },
   actions: {
-    async fetchGallery() {
+    async fetchGallery(_, { path }) {
       try {
-        const database = (await firebase.database().ref('gallery').once('value')).val() || {}
+        const database = (await firebase.database().ref(`${path}`).once('value')).val() || {}
         return Object.keys(database).map(key => ({ ...database[key], id: key }))
       } catch (e) {
         throw e
       }
     },
 
-    async uploadData({ dispatch, commit, state }, { img, description, id }) {
+    async uploadData({ dispatch, commit, state }, { img, description, path }) {
       try {
         const refStorage = await firebase.storage().ref(`/images/${img.name}`)
         const taskStorage = refStorage.put(img)
@@ -37,7 +37,7 @@ export default {
         }, () => {
           taskStorage.snapshot.ref.getDownloadURL()
             .then(url => {
-              firebase.database().ref(`gallery`).push({
+              firebase.database().ref(`${path}`).push({
                 image: url,
                 description,
                 title: img.name.toString().split('.')[0]
@@ -48,18 +48,17 @@ export default {
         throw e
       }
     },
-    async deletePost({ state }, id) {
+    async deletePost({ state }, { id, path }) {
       try {
-        await firebase.database().ref(`gallery/${id}`).remove()
+        await firebase.database().ref(`${path}/${id}`).remove()
       } catch (e) {
         throw e
       }
     },
-
-    async editPost({ state }, { description, id }) {
+    async editPost({ state }, { title, id, path }) {
       try {
-        let ref = await firebase.database().ref('gallery').child(id)
-        ref.update({ description })
+        let ref = await firebase.database().ref(`${path}`).child(id)
+        ref.update({ description: title })
         state.percent = 100
       } catch (e) {
         throw e
