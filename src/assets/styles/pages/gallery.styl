@@ -1,6 +1,7 @@
 .gallery
   padding-bottom 125rem
   overflow hidden
+
   &__up
     height 35rem
     width 35rem
@@ -8,7 +9,7 @@
     bottom 80rem
     right 25rem
     z-index 1
-    background url("./assets/img/arrow.png") center/contain no-repeat
+    background url("./assets/img/arrow.png") center / contain no-repeat
     transform rotate(-90deg)
     filter invert(1) brightness(50%)
     opacity 0
@@ -18,6 +19,14 @@
     display flex
     align-items flex-end
     justify-content space-between
+
+  &__empty
+    margin-top 120rem
+    font-size 30rem
+    text-align center
+    @media $mobile
+      font-size 20rem
+      margin-top 60rem
 
   &__span
     margin-top 50rem

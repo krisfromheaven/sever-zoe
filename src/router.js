@@ -38,6 +38,11 @@ let routes = [
     name: 'World'
   },
   {
+    path: '/exhibitions',
+    component: () => import('./views/Exhibitions'),
+    name: 'Exhibitions'
+  },
+  {
     path: '*',
     component: About
   }

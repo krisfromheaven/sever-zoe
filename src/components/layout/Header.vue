@@ -9,7 +9,7 @@
           li.header__nav-item
             router-link(to='/gallery' ) Gallery
           li.header__nav-item
-            router-link(to='/' ) Exhibitions
+            router-link(to='/exhibitions' ) Exhibitions
           li.header__nav-item
             router-link(to='/world' ) Art pieces all over the world
           li.header__nav-item

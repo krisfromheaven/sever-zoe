@@ -25,7 +25,8 @@
           @click.prevent='addNewItem'
           v-if='$store.state.auth.user.loggedIn'
         ) + Add new item
-      .gallery__list
+      .gallery__empty(v-if='!gallery.length') Art not found
+      .gallery__list(v-else)
         .gallery__item(
           v-for='(item,i) in gallery'
           :key='i'
