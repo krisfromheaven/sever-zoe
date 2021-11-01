@@ -57,6 +57,12 @@ import GallerySlider from '../components/GallerySlider'
 
 export default {
   name: 'Gallery',
+  metaInfo() {
+    return {
+      title: 'Gallery',
+      titleTemplate: 'Zoe | %s'
+    }
+  },
   components: { GallerySlider, Modal, Edit },
   data: () => ({
     visible: false,

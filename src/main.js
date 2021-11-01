@@ -10,6 +10,7 @@ import 'firebase/compat/storage'
 import 'firebase/compat/database'
 
 import VueLazyload from 'vue-lazyload'
+import VueMeta from 'vue-meta'
 
 const loadimage = require('./assets/img/loading.gif')
 
@@ -19,6 +20,7 @@ Vue.use(VueLazyload, {
   attempt: 1
 })
 Vue.use(VueScreen)
+Vue.use(VueMeta)
 Vue.config.productionTip = false
 
 

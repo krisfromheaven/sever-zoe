@@ -13,10 +13,12 @@
 
 <script>
 export default {
-  name: 'Contact'
+  name: 'Contact',
+  metaInfo() {
+    return {
+      title: 'Contacts',
+      titleTemplate: 'Zoe | %s'
+    }
+  }
 }
 </script>
-
-<style scoped>
-
-</style>

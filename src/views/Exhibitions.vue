@@ -38,6 +38,12 @@ import exhibitionsForm from '../components/exhibitionsForm'
 
 export default {
   name: 'Exhibitions',
+  metaInfo() {
+    return {
+      title: 'Exhibitions',
+      titleTemplate: 'Zoe | %s'
+    }
+  },
   data: () => ({
     category: 'solo',
     showForm: false,
@@ -59,8 +65,6 @@ export default {
         .sort(function(a, b) {
           return a.year < b.year ? -1 : a.year > b.year ? 1 : 0
         })
-
-
       return this.category === 'solo' ? solo : group
     }
   },
@@ -83,7 +87,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-
-</style>

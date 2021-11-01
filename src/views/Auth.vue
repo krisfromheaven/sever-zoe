@@ -21,6 +21,12 @@ import message from '../utils/message'
 
 export default {
   name: 'Auth',
+  metaInfo() {
+    return {
+      title: 'Auth',
+      titleTemplate: 'Zoe | %s'
+    }
+  },
   data: () => ({
     email: '',
     password: ''

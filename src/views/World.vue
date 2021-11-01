@@ -43,6 +43,12 @@ import Edit from '../assets/img/edit.svg'
 
 export default {
   name: 'World',
+  metaInfo() {
+    return {
+      title: 'World',
+      titleTemplate: 'Zoe | %s'
+    }
+  },
   data: () => ({
     visible: false,
     post: null,

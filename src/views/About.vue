@@ -18,5 +18,11 @@
 
 export default {
   name: 'About',
+  metaInfo() {
+    return {
+      title: 'About',
+      titleTemplate: 'Zoe | %s'
+    }
+  }
 }
 </script>
