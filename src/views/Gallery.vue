@@ -27,8 +27,8 @@
         ) + Add new item
       .gallery__empty(v-if='!gallery.length') Art not found
       .gallery__list(v-else)
-        .gallery__item(
-          v-for='(item,i) in gallery'
+        .gallery__item.h-anim(
+          v-for='(item,i) in sortGallery'
           :key='i'
         )
           .gallery__item-wrapper(
@@ -51,7 +51,7 @@
 
 <script>
 import Modal from '../components/Modal'
-import { qs } from '../helpers'
+import { qs, elemVisCheck } from '../helpers'
 import Edit from '../assets/img/edit.svg'
 import GallerySlider from '../components/GallerySlider'
 
@@ -74,6 +74,7 @@ export default {
   }),
   async mounted() {
     await this.refresh()
+    elemVisCheck()
     document.addEventListener('scroll', () => {
       if (!qs('.gallery__up')) {
         return
@@ -87,8 +88,15 @@ export default {
       }
     })
   },
-
+  computed: {
+    sortGallery() {
+      return this.gallery.sort(function(a, b) {
+        return +a.title.split('-')[0] - +b.title.split('-')[0]
+      })
+    }
+  },
   methods: {
+
     scrollUp() {
       window.scrollTo({
         top: 0,
@@ -118,6 +126,7 @@ export default {
     },
     async refresh() {
       this.gallery = await this.$store.dispatch('gallery/fetchGallery', { path: this.$route.path })
+
     },
     addNewItem() {
       this.visible = !this.visible

@@ -43,6 +43,8 @@
     font-weight 600
     color $primary
     border-bottom 1px solid $primary
+    @media $mobile
+      font-size 10rem
 
   &__loader
     position absolute
@@ -56,16 +58,22 @@
     flex-wrap wrap
 
   &__item
-    border 1px solid $gray
     overflow hidden
     width calc(100% / 4)
+    opacity 0
+    transition opacity .4s ease
+
+    &[visible]
+      opacity 1
+
+    &:nth-child(-n + 12)
+      opacity 1
     @media $mobile
       width 100%
 
     &-wrapper
       height 350rem
       margin 2rem
-      border 1px solid $second
       cursor pointer
       position relative
       display flex
@@ -82,7 +90,6 @@
       &:hover
         transition background-position 15s ease
         background-position 80% 80%
-
 
       &:hover .gallery__item-text
         transform translateY(0)
@@ -131,5 +138,6 @@
       @media $mobile
         font-size 19rem
         line-height 24rem
+
 
 

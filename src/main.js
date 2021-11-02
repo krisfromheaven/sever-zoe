@@ -12,11 +12,11 @@ import 'firebase/compat/database'
 import VueLazyload from 'vue-lazyload'
 import VueMeta from 'vue-meta'
 
-const loadimage = require('./assets/img/loading.gif')
+
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  loading: loadimage,
+  loading: require('./assets/img/loading.gif'),
   attempt: 1
 })
 Vue.use(VueScreen)
