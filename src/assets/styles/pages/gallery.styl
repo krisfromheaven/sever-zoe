@@ -93,6 +93,7 @@
 
       &:hover .gallery__item-text
         transform translateY(0)
+        opacity 1
 
       &:hover .gallery__item-delete
         opacity 1
@@ -132,9 +133,10 @@
       font-weight 700
       padding 10rem
       transform translateY(100%)
-      transition transform 1s ease
+      opacity 0
+      transition transform 1s ease, opacity 1s ease
       background rgba(248, 248, 248, 0.75)
-      backdrop-filter blur(2rem)
+      backdrop-filter blur(3rem)
       @media $mobile
         font-size 19rem
         line-height 24rem
