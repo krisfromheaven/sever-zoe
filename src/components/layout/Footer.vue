@@ -2,9 +2,9 @@
   footer.footer
     .container
       .social.footer__social
-        a.footer__social-link(href='/' target='_blank')
+        a.footer__social-link(href='https://www.facebook.com/Zoe-Sever-Artist-1475026252748227' target='_blank')
           Facebook.footer__social-icon
-        a.footer__social-link(href='/' target='_blank')
+        a.footer__social-link(href='mailto: severzoe@gmail.com' target='_blank')
           Gmail.footer__social-icon
       nav.footer__nav(v-if='!$store.state.common.mobile' )
         ul.footer__nav-list
