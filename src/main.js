@@ -28,13 +28,14 @@ Vue.config.productionTip = false
 
 firebase.initializeApp({
   apiKey: process.env.VUE_APP_FIREBASE_TOKEN,
-  authDomain: 'zoe-sever-gallery.firebaseapp.com',
-  projectId: 'zoe-sever-gallery',
-  storageBucket: 'zoe-sever-gallery.appspot.com',
-  messagingSenderId: '1072606766324',
-  appId: '1:1072606766324:web:d891197d2a749738812aa1',
-  databaseURL: 'zoe-sever-gallery-default-rtdb.europe-west1.firebasedatabase.app'
+  authDomain: 'zoe-sever.firebaseapp.com',
+  projectId: 'zoe-sever',
+  storageBucket: 'zoe-sever.appspot.com',
+  messagingSenderId: '713368611782',
+  appId: '1:713368611782:web:d836a660e6b5d7d49520c7',
+  databaseURL: 'zoe-sever-default-rtdb.europe-west1.firebasedatabase.app'
 })
+
 
 firebase.auth().onAuthStateChanged(user => {
   store.dispatch('auth/fetchUser', user)

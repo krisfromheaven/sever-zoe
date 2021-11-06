@@ -46,6 +46,7 @@
             .gallery__item-text {{ item.description ? item.description : item.title }}
 
       paginate(
+        v-if='items'
         v-model="page"
         :page-count="pageCount"
         :click-handler="pageChangeHandler"
@@ -84,11 +85,15 @@ export default {
   async mounted() {
     await this.refresh()
     setTimeout(() => {
-      qs('.gallery__paginate').setAttribute('visible', true)
+      if (this.items) {
+        qs('.gallery__paginate').setAttribute('visible', true)
+      }
     }, 500)
   },
   beforeDestroy() {
-    qs('.gallery__paginate').removeAttribute('visible')
+    if (this.items) {
+      qs('.gallery__paginate').removeAttribute('visible')
+    }
   },
   methods: {
     async refresh() {

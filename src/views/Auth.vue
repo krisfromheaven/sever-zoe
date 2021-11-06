@@ -2,8 +2,7 @@
   section.auth
     .container
       h1.auth__title.title authorization
-      transition(name='fade' mode='out-in' v-if='$store.state.auth.user.loggedIn')
-        h2.auth__suptitle You are logged in
+      h2.auth__suptitle(v-if='$store.state.auth.user.loggedIn') You are logged in
       form.form.auth__form(@submit.prevent='onSubmit' v-else )
         .form__control
           label.form__label(for='email') Email
@@ -36,12 +35,14 @@ export default {
   },
   methods: {
     async onSubmit() {
-      try {
-        await this.$store.dispatch('auth/login', {
-          email: this.email.trim(),
-          password: this.password.trim()
-        })
-      } catch (e) {
+      await this.$store.dispatch('auth/login', {
+        email: this.email.trim(),
+        password: this.password.trim()
+      })
+
+      const user = this.$store.dispatch('auth/getUid')
+      if (user) {
+        await this.$router.push('/')
       }
     }
   },
