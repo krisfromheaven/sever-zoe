@@ -66,6 +66,12 @@
       background-repeat no-repeat
       transition background-position 1s ease
 
+      &[lazy=loading]
+        background-size contain
+
+      &[lazy=error]
+        background-size contain
+
       @media $mobile
         height 250rem
 
@@ -132,6 +138,7 @@
   align-items flex-end
   justify-content center
   color $primary
+
   &[visible]
     opacity 1
   @media $mobile

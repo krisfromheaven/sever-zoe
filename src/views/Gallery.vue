@@ -78,10 +78,7 @@ export default {
   data: () => ({
     visible: false,
     post: null,
-    gallery: [],
-    isSlider: false,
-    index: null,
-    slide: ''
+    gallery: []
   }),
   components: { GallerySlider, Modal, Edit },
   async mounted() {
@@ -89,6 +86,9 @@ export default {
     setTimeout(() => {
       qs('.gallery__paginate').setAttribute('visible', true)
     }, 500)
+  },
+  beforeDestroy() {
+    qs('.gallery__paginate').removeAttribute('visible')
   },
   methods: {
     async refresh() {
@@ -102,10 +102,7 @@ export default {
       this.visible = !this.visible
       this.post = null
     },
-    closeSlider() {
-      this.isSlider = false
-      this.slide = null
-    },
+
     async deletePost(id) {
       if (id) {
         await this.$store.dispatch('gallery/deletePost', { id, path: this.$route.path })

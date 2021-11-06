@@ -1,4 +1,11 @@
 export default {
+  data() {
+    return {
+      isSlider: false,
+      index: null,
+      slide: ''
+    }
+  },
   methods: {
     nextSlide({ slide, index }) {
       if (index === this.items.length - 1) {
@@ -20,6 +27,10 @@ export default {
         this.slide = item
         this.isSlider = true
       }
+    },
+    closeSlider() {
+      this.isSlider = false
+      this.slide = null
     }
   }
 }
