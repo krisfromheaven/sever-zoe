@@ -69,8 +69,14 @@
       &[lazy=loading]
         background-size contain
 
+
       &[lazy=error]
         background-size contain
+        background-repeat no-repeat
+
+        &:hover
+          background-position center
+
 
       @media $mobile
         height 250rem
