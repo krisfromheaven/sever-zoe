@@ -1,6 +1,5 @@
 <template lang='pug'>
   section.gallery
-    button.gallery__up(type='button' @click='scrollUp')
     gallery-slider(
       v-if='isSlider'
       :slide='slide'
@@ -25,10 +24,9 @@
           @click.prevent='addNewItem'
           v-if='$store.state.auth.user.loggedIn'
         ) + Add new item
-      .gallery__empty(v-if='!gallery.length') Art not found
-      .gallery__list(v-else)
-        .gallery__item.h-anim(
-          v-for='(item,i) in sortGallery'
+      .gallery__list
+        .gallery__item(
+          v-for='(item,i) in items'
           :key='i'
         )
           .gallery__item-wrapper(
@@ -47,13 +45,26 @@
               Edit
             .gallery__item-text {{ item.description ? item.description : item.title }}
 
+      paginate(
+        v-model="page"
+        :page-count="pageCount"
+        :click-handler="pageChangeHandler"
+        :prev-text="'prev'"
+        :next-text="'next'"
+        :container-class="'gallery__paginate'"
+        :page-class="'gallery__paginate-item'"
+        :prev-class="'gallery__paginate-prev'"
+        :next-class="'gallery__paginate-next'"
+      )
 </template>
 
 <script>
 import Modal from '../components/Modal'
-import { qs, elemVisCheck } from '../helpers'
+import { qs } from '../helpers'
 import Edit from '../assets/img/edit.svg'
 import GallerySlider from '../components/GallerySlider'
+import paginationMixin from '../mixins/pagination.mixin'
+import sliderMixin from '../mixins/slider.mixin'
 
 export default {
   name: 'Gallery',
@@ -63,7 +74,7 @@ export default {
       titleTemplate: 'Zoe | %s'
     }
   },
-  components: { GallerySlider, Modal, Edit },
+  mixins: [paginationMixin, sliderMixin],
   data: () => ({
     visible: false,
     post: null,
@@ -72,61 +83,20 @@ export default {
     index: null,
     slide: ''
   }),
+  components: { GallerySlider, Modal, Edit },
   async mounted() {
     await this.refresh()
-    elemVisCheck()
-    document.addEventListener('scroll', () => {
-      if (!qs('.gallery__up')) {
-        return
-      }
-      if (window.pageYOffset > window.innerHeight) {
-        qs('.gallery__up').style.opacity = '1'
-        qs('.gallery__up').style.visibility = 'visible'
-      } else {
-        qs('.gallery__up').style.opacity = '0'
-        qs('.gallery__up').style.visibility = 'hidden'
-      }
-    })
-  },
-  computed: {
-    sortGallery() {
-      return this.gallery.sort(function(a, b) {
-        return +a.title.split('-')[0] - +b.title.split('-')[0]
-      })
-    }
+    setTimeout(() => {
+      qs('.gallery__paginate').setAttribute('visible', true)
+    }, 500)
   },
   methods: {
-
-    scrollUp() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
-    },
-    nextSlide({ slide, index }) {
-      if (index === this.gallery.length - 1) {
-        return
-      }
-      this.index = this.gallery.findIndex(r => r.id === slide.id) + 1
-      this.slide = this.gallery[index + 1]
-    },
-    prevSlide({ slide, index }) {
-      if (!index) {
-        return
-      }
-      this.index = this.gallery.findIndex(r => r.id === slide.id) - 1
-      this.slide = this.gallery[index - 1]
-    },
-    showSlide(item, idx, e) {
-      if (e.target === this.$refs.item[idx] && item) {
-        this.index = idx
-        this.slide = item
-        this.isSlider = true
-      }
-    },
     async refresh() {
       this.gallery = await this.$store.dispatch('gallery/fetchGallery', { path: this.$route.path })
-
+      this.gallery.sort(function(a, b) {
+        return +a.title?.split('-')[0] - +b.title?.split('-')[0]
+      })
+      this.setupPagination(this.gallery)
     },
     addNewItem() {
       this.visible = !this.visible
@@ -140,6 +110,7 @@ export default {
       if (id) {
         await this.$store.dispatch('gallery/deletePost', { id, path: this.$route.path })
         await this.refresh()
+        this.setupPagination(this.gallery)
       }
     },
     openUpdatePost(post) {
@@ -150,9 +121,11 @@ export default {
     },
     async onSubmit(data) {
       await this.$store.dispatch('gallery/uploadData', { ...data, path: this.$route.path })
+      this.setupPagination(this.gallery)
     },
     async editPost(post) {
       await this.$store.dispatch('gallery/editPost', { ...post, path: this.$route.path })
+      this.setupPagination(this.gallery)
     }
   },
   watch: {

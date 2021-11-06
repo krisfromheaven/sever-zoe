@@ -16,8 +16,7 @@
           @click.prevent='addNewItem'
           v-if='$store.state.auth.user.loggedIn'
         ) + Add new item
-      .gallery__empty(v-if='!world.length') Art not found
-      .world__list(v-else)
+      .world__list
         .world__item(
           v-for='item in world'
           :key='item.id'

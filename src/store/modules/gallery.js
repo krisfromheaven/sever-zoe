@@ -40,7 +40,7 @@ export default {
               firebase.database().ref(`${path}`).push({
                 image: url,
                 description,
-                title: img.name.toString().split('.')[0]
+                title: img.name.toString().split('.jpg' || '.jpeg' || '.png')[0]
               })
             })
         })

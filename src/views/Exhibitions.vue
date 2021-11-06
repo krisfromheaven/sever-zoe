@@ -20,8 +20,7 @@
           @click='changeCategory("solo")'
           :disabled='category === "solo"'
         ) Solo
-      .exhibitions__loading(v-if='!exhibitions.length' ) No exhibitions...
-      .exhibitions__list(v-else)
+      .exhibitions__list
         .exhibitions__item(v-for='item in sortExhibitions' :key='item.id')
           button.exhibitions__item-delete(
             type='button'

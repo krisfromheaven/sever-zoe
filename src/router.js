@@ -56,7 +56,7 @@ const router = new Router({
   scrollBehavior() {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({ x: 0, y: 0 })
+        resolve({ x: 0, y: 0, behavior: 'smooth' })
       }, 500)
     })
   }

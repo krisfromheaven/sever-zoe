@@ -11,16 +11,18 @@ import 'firebase/compat/database'
 
 import VueLazyload from 'vue-lazyload'
 import VueMeta from 'vue-meta'
-
+import Paginate from 'vuejs-paginate'
 
 
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   loading: require('./assets/img/loading.gif'),
+  error: require('./assets/img/pngegg.png'),
   attempt: 1
 })
 Vue.use(VueScreen)
 Vue.use(VueMeta)
+Vue.component('paginate', Paginate)
 Vue.config.productionTip = false
 
 

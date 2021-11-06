@@ -2,18 +2,6 @@
   padding-bottom 125rem
   overflow hidden
 
-  &__up
-    height 35rem
-    width 35rem
-    position fixed
-    bottom 80rem
-    right 25rem
-    z-index 1
-    background url("./assets/img/arrow.png") center / contain no-repeat
-    transform rotate(-90deg)
-    filter invert(1) brightness(50%)
-    opacity 0
-    visibility hidden
 
   &__title-wrapper
     display flex
@@ -60,20 +48,14 @@
   &__item
     overflow hidden
     width calc(100% / 4)
-    opacity 0
     transition opacity .4s ease
-
-    &[visible]
-      opacity 1
-
-    &:nth-child(-n + 12)
-      opacity 1
+    border 2rem solid $primary
     @media $mobile
       width 100%
 
     &-wrapper
       height 350rem
-      margin 2rem
+      margin 5rem
       cursor pointer
       position relative
       display flex
@@ -141,5 +123,31 @@
         font-size 19rem
         line-height 24rem
 
+
+.gallery__paginate
+  opacity 0
+  margin-top 20rem
+  display flex
+  font-size 30rem
+  align-items flex-end
+  justify-content center
+  color $primary
+  &[visible]
+    opacity 1
+  @media $mobile
+    font-size 19rem
+
+  &-item
+    margin 0 8rem
+
+    &.active
+      font-weight 700
+      border-bottom 1rem solid $primary
+
+  &-prev
+    margin-right 10rem
+
+  &-next
+    margin-left 10rem
 
 
