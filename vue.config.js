@@ -1,4 +1,5 @@
 const path = require('path')
+
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/sever-zoe/'
@@ -33,10 +34,10 @@ module.exports = {
   productionSourceMap: process.env.NODE_ENV !== 'production',
   configureWebpack: {
     resolve: {
-       alias: {
-          '@': path.resolve(__dirname,'src')
-       },
-     },
+      alias: {
+        '@': path.resolve(__dirname, 'src')
+      }
+    }
   }
 }
 
