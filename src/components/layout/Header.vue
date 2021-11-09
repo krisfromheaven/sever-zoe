@@ -15,8 +15,7 @@
           li.header__nav-item
             router-link(to='/contact' ) Contacts
           li.header__nav-item
-            a(
-              href='#'
+            button.header__nav-item__btn(
               v-if='$store.state.auth.user.loggedIn'
               @click.prevent='logout'
             ) Logout
@@ -43,12 +42,13 @@ export default {
     }),
     isHero() {
       return this.$route.name === String('About')
-    },
+    }
 
   },
   methods: {
     async logout() {
       await this.$store.dispatch('auth/logout')
+      location.reload()
     }
   },
   watch: {
@@ -59,7 +59,7 @@ export default {
       if (this.burgerIsOpen) {
         this.$store.state.common.burgerIsOpen = false
       }
-    },
+    }
   }
 }
 </script>

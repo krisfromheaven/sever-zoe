@@ -13,27 +13,34 @@
   &__item
     height 500rem
     overflow hidden
-    margin-bottom 50rem
+    padding 20rem
     width calc(100% / 2)
     @media $mobile
       width 100%
       height 300rem
-      margin-bottom 25rem
+      padding 10rem
 
     &-wrapper
+      margin 0
+      position relative
       height 100%
       width 100%
       background-size cover
       background-repeat repeat
       background-position center
       cursor default
+      transition background-position 10s ease
+
+      &:hover
+        background-position 80% 80%
 
     &-text
-      transform translateY(0)
-      font-size 40rem
+      transform translateY(100%)
+      opacity 0
+      font-size 35rem
       line-height 47rem
-      padding 20rem 10rem
+      padding 15rem 10rem
       @media $mobile
-        font-size 30rem
-        line-height 37rem
+        font-size 15rem
+        line-height 17rem
         padding 10rem 8rem

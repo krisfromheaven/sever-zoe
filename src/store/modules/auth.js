@@ -5,7 +5,8 @@ export default {
   state: {
     error: null,
     user: {
-      loggedIn: false
+      loggedIn: false,
+      uid: null
     }
   },
   mutations: {
@@ -15,15 +16,15 @@ export default {
     CLEAR_ERROR(state) {
       state.error = null
     },
-    SET_LOGGED_IN(state, value) {
-      if (value) {
+    SET_LOGGED_IN(state, user) {
+      if (user) {
         state.user.loggedIn = true
+        state.user.uid = firebase.auth().currentUser.uid ?? null
       }
     },
     CLEAR_USER_DATA(state) {
       state.user.loggedIn = false
     }
-
   },
   actions: {
     async fetchUser({ commit }, user) {
@@ -41,10 +42,6 @@ export default {
     async logout({ commit }) {
       await firebase.auth().signOut()
       commit('CLEAR_USER_DATA')
-    },
-    getUid() {
-      const user = firebase.auth().currentUser
-      return user ? user.uid : null
     }
   }
 

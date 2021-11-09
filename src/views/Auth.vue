@@ -1,8 +1,8 @@
 <template lang='pug'>
-  section.auth
+  section.auth(v-cloak ref='auth')
     .container
       h1.auth__title.title authorization
-      h2.auth__suptitle(v-if='$store.state.auth.user.loggedIn') You are logged in
+      h2.auth__suptitle(v-if='this.$store.state.auth.user.uid' ) You are logged in
       form.form.auth__form(@submit.prevent='onSubmit' v-else )
         .form__control
           label.form__label(for='email') Email
@@ -30,6 +30,12 @@ export default {
     email: '',
     password: ''
   }),
+  mounted() {
+    this.$refs.auth.style.display = 'none'
+    setTimeout(() => {
+      this.$refs.auth.style.display = ''
+    }, 500)
+  },
   beforeDestroy() {
     this.$store.commit('auth/CLEAR_ERROR')
   },
@@ -40,8 +46,7 @@ export default {
         password: this.password.trim()
       })
 
-      const user = this.$store.dispatch('auth/getUid')
-      if (user) {
+      if (this.$store.state.auth.user.uid) {
         await this.$router.push('/')
       }
     }

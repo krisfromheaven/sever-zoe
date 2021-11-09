@@ -1,7 +1,9 @@
 .contact
   height 100%
+
   &__title
-    padding-top 0
+    margin-top 0
+
   &__wrapper
     margin 120rem 0
     display flex
@@ -9,11 +11,13 @@
     @media $mobile
       flex-direction column
       margin 55rem 0
+
   &__info,
   &__img-wrapper
     width 50%
     @media $mobile
       width 100%
+
     &-row
       display flex
       flex-direction column
@@ -21,15 +25,21 @@
       @media $mobile
         margin-top 57rem
         margin-bottom 100rem
+
     &-link
-      margin 40rem 0
+      margin 30rem 0
       font-family $ep
-      font-size 17rem
-      line-height 17rem
+      font-size 20rem
+      line-height 27rem
       font-weight 400
-      color $primary
+      color $gray
+      transition color .5s ease
+
+      &:hover
+        color $primary
       @media $mobile
         margin 20rem 0
+
   &__img
     display block
     width 100%

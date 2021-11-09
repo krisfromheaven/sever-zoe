@@ -18,17 +18,20 @@
       cursor pointer
       font-size 50rem
       line-height 70rem
-      color rgba($gray, .3)
+      color rgba($primary, .3)
       transition color .4s ease
       border-bottom none
+
+      &:hover
+        color rgba($primary, .6)
       @media $mobile
         font-size 30rem
         line-height 50rem
 
 
       &:disabled
-        color $gray
-        border-bottom 1px solid $gray
+        color $primary
+        font-weight bold
 
       &:first-child
         margin-right 20rem
@@ -36,6 +39,17 @@
   &__list
     overflow auto
     height 600rem
+
+    &::-webkit-scrollbar
+      width 13rem
+      background-color $second
+
+    &::-webkit-scrollbar-thumb
+      background-color $gray
+      border-radius 20em
+
+    scrollbar-color $second
+    scrollbar-width thin
     @media $mobile
       height auto
 
@@ -57,7 +71,7 @@
       font-size 20rem
       font-weight 600
       line-height 21rem
-      color $primary
+      color $gray
       @media $mobile
         font-size 15rem
 

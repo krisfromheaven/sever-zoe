@@ -10,15 +10,28 @@
   &.light .header__logo
     color $second
 
-  &.light .header__nav-item > a
+  &.light .header__nav-item > a,
+  &.light .header__nav-item > button
     color $second
 
-  & .header__nav-item > a
-    color $gray
+  & .header__nav-item > a,
+  & .header__nav-item > button
+
+    color $primary
     transition color .5s
 
-  &.light .header__nav-item:after
+  &.light .header__nav-item > a:after
     background-color $second
+
+  & .header__nav-item > a:after
+    background-color $primary
+
+  &.light .header__nav-item > button:after
+    filter invert(1)
+
+  //
+  //&.light .header__nav-item:after
+  //  background-color $second
 
   & > .container
     display flex
@@ -67,8 +80,9 @@
         flex-direction column
 
     &-item
+      font-family $ep
       padding-bottom 2rem
-      font-size 17rem
+      font-size 19rem
       margin-left 50rem
       position relative
       @media $mobile
@@ -76,32 +90,44 @@
         margin-left 0
         margin-bottom 40rem
 
-
-      &:after
-        content ''
-        height 1rem
-        width 100%
-        background-color $gray
-        position absolute
-        bottom 0
-        left 0
-        right 0
-        opacity 0
-        transition opacity .5s ease, color .5s
-
-      &:hover:after
-        opacity 1
-
       & > a
-        padding-bottom 2rem
+        padding-bottom 5rem
         @media $mobile
           padding-bottom 0
 
-        &:hover
-          color $primary
+        &:after
+          content ''
+          height 1rem
+          width 0
+          background-color $primary
+          position absolute
+          bottom 0
+          left 0
+          right 0
+          opacity 1
+          transition width .5s ease
 
-        &.router-link-exact-active.active
-          border-bottom 1px solid
+        &:hover:after
+          width 100%
+
+        &.router-link-exact-active.active:after
+          width 100%
+
+
+      & > button
+        position relative
+        padding-right 20rem
+
+        &:after
+          content ''
+          height 14rem
+          width 18rem
+          background url("./assets/img/logout.png") center / contain  no-repeat
+          position absolute
+          top 4rem
+          right 0
+          transition filter .5s ease
+
 
 .burger__btn
   height 21rem
