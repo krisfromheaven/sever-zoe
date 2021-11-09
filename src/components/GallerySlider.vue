@@ -4,7 +4,7 @@
       .gallery__slider-control
         button.gallery__slider-zoom(type='button' @click='isZoom = !isZoom')  {{isZoom ? '-': '+'}} zoom
         span.gallery__slider-text {{slide.description ? slide.description : slide.title}}
-        button.gallery__slider-close(@click.prevent="$emit('close')" tabindex="0") &#10006;
+        button.gallery__slider-close(@click.prevent="$emit('close')") &#10006;
       .gallery__slider-content
         img(:class='["gallery__slider-image", {zoom: isZoom}]' :src='slide.image')
       .gallery__slider-arrows
@@ -27,11 +27,7 @@ export default {
       }
     })
   },
-  methods: {
-    log() {
-      console.log('esc')
-    }
-  }
+
 
 }
 </script>
