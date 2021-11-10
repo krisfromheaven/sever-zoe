@@ -1,9 +1,9 @@
 const data = {
   description: 'Her painting serves as the positive double of reality',
   share: {
-    default_img: require('./public/share.png'),
+    // default_img: require('@/assets/img/intro-bg.png'),
     title: 'Zoe Sever',
-    description: 'follow form fun',
+    description: 'form follow fun',
   },
 }
 
