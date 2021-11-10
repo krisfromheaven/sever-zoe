@@ -4,12 +4,18 @@
   display flex
   align-items center
   margin-top -75rem
+
   @media $mobile
     background #272727 url("./assets/img/intro-bg-m.png") bottom / contain no-repeat
+
+  &[visible] .container
+    opacity 1
 
   & > .container
     display flex
     justify-content flex-end
+    opacity 0
+    transition opacity .4s ease 1s
 
   &__text
     width 735rem

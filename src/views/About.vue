@@ -16,6 +16,8 @@
 
 <script>
 
+import { qs } from '../helpers'
+
 export default {
   name: 'About',
   metaInfo() {
@@ -23,6 +25,12 @@ export default {
       title: 'About',
       titleTemplate: 'Zoe | %s'
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      qs('.about').setAttribute('visible', true)
+    }, 200)
+
   }
 }
 </script>

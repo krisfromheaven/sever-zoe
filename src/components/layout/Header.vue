@@ -36,6 +36,11 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Header',
+  mounted() {
+    setTimeout(() => {
+      qs('.header').setAttribute('visible', true)
+    }, 200)
+  },
   computed: {
     ...mapState({
       burgerIsOpen: s => s.common.burgerIsOpen

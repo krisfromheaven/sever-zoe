@@ -4,9 +4,12 @@
   z-index 1
   display flex
   align-items center
+  opacity 0
+  transition opacity .4s ease 1s
   @media $mobile
     padding-top 25rem
-
+  &[visible]
+    opacity 1
   &.light .header__logo
     color $second
 
@@ -29,9 +32,6 @@
   &.light .header__nav-item > button:after
     filter invert(1)
 
-  //
-  //&.light .header__nav-item:after
-  //  background-color $second
 
   & > .container
     display flex
@@ -114,7 +114,9 @@
       & > button
         position relative
         padding-right 20rem
-
+        @media $mobile
+          color $gray !important
+          padding-right 0
         &:after
           content ''
           height 14rem
@@ -124,6 +126,8 @@
           top 4rem
           right 0
           transition filter .5s ease
+          @media $mobile
+            display none
 
 
 .burger__btn
