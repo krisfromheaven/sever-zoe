@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 import About from './views/About'
 
 const originalPush = Router.prototype.push
@@ -62,5 +61,6 @@ const router = new Router({
   }
 
 })
+
 
 export default router

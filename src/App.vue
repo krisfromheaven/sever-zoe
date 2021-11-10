@@ -11,9 +11,21 @@
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import { qs } from './helpers'
-
+import data from '../data.js'
 
 export default {
+  name: 'App',
+  metaInfo() {
+    return {
+      title: 'Zoe Sever',
+      meta: [
+        { name: 'description', content: data.description },
+        { property: 'og:title', content: data.share.title },
+        { property: 'og:description', content: data.share.description },
+        { property: 'og:image', content: data.share.default_img }
+      ]
+    }
+  },
   components: {
     Header,
     Footer
