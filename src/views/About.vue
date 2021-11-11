@@ -9,7 +9,7 @@
       .container
         h6.about__description-title Zoe Sever
         span.about__description-text
-          p Was born in 194 in Lviv, Ukraine and moved to Tel Aviv, Israel in 1990. Zoe graduated from Bezalel Akademy of Arts and Design and Jerusalem and Lviv School of Arts, Ukraine.She is married and have thee sons. Zoe has created an art studio and currently lives in Givatayim, Israel.
+          p Was born in 1974 in Lviv, Ukraine and moved to Tel Aviv, Israel in 1990. Zoe graduated from Bezalel Akademy of Arts and Design and Jerusalem and Lviv School of Arts, Ukraine.She is married and have thee sons. Zoe has created an art studio and currently lives in Givatayim, Israel.
           p Since 2012 she has been exhibiting professionally in Israel and around the word. Her works could be found in museums and private collections in Israel, USA, Canada, Spain, France, Germany, UK, Switzerland, Australia, Holland, Ukraine and Kazakhstan.
 
 </template>
