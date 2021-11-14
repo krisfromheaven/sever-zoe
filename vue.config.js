@@ -1,5 +1,5 @@
 const path = require('path')
-const data = require('./data.js')
+
 module.exports = {
   // publicPath: process.env.NODE_ENV === 'production'
   //   ? '/sever-zoe/'
