@@ -13,7 +13,6 @@ import VueLazyload from 'vue-lazyload'
 import VueMeta from 'vue-meta'
 import Paginate from 'vuejs-paginate'
 
-
 Vue.use(VueLazyload, {
   preLoad: 1.3,
   loading: require('./assets/img/loading.gif'),

@@ -63,6 +63,7 @@
     position absolute
     left 30rem
     color $primary
+    z-index 1
     @media $mobile
       font-size 15rem
       padding-bottom 2rem
@@ -71,8 +72,16 @@
       border-bottom none
 
   &-text
+    text-align center
+    width 80%
+    white-space nowrap
+    text-overflow ellipsis
+    overflow hidden
     @media $mobile
+      width 100%
       padding-right 65rem
+      white-space normal
+      text-align left
 
   &-close
     font-size 25rem
