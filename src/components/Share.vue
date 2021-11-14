@@ -37,7 +37,8 @@ export default {
           title: this.title
         },
         facebook: {
-          title: this.title
+          title: this.title,
+          description: this.description
         }
       }
     }
