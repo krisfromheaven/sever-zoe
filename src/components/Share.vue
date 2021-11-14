@@ -4,7 +4,7 @@
     :title="title"
     :description='description'
     :image='image'
-    :contentByService='contentByService'
+
     :url='url'
   )
 </template>
@@ -27,21 +27,8 @@ export default {
     },
     url() {
       return 'https://zoesever.com/'
-    },
-    contentByService() {
-      return {
-        vkontakte: {
-          title: this.title + ' ' + this.description
-        },
-        twitter: {
-          title: this.title
-        },
-        facebook: {
-          title: this.title,
-          description: this.description
-        }
-      }
     }
+
   }
 }
 </script>
