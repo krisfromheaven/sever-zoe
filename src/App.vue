@@ -17,14 +17,7 @@ export default {
   name: 'App',
   metaInfo() {
     return {
-      title: 'Zoe Sever',
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'description', content: 'Her painting serves as the positive double of reality' },
-        { property: 'og:title', content: 'Zoe Sever' },
-        { property: 'og:url', content: 'https://zoesever.com/' },
-        { property: 'og:image', content: `${location.origin}/share.jpg` }
-      ]
+      title: 'Zoe Sever'
     }
   },
   components: {

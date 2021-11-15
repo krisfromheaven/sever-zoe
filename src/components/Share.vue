@@ -3,8 +3,6 @@
     :services="['vkontakte','facebook','twitter']"
     :title="title"
     :description='description'
-    :image='image'
-
     :url='url'
   )
 </template>
@@ -26,7 +24,7 @@ export default {
       return `${location.origin}/share.jpg`
     },
     url() {
-      return 'https://zoesever.com/'
+      return 'https://zoesever.com'
     }
 
   }
