@@ -4,6 +4,7 @@
     :title="title"
     :description='description'
     :url='url'
+    :image='image'
   )
 </template>
 
