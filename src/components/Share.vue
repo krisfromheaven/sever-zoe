@@ -1,10 +1,11 @@
-<template lang='pug'>
+<template lang="pug">
   YandexShare(
     :services="['vkontakte','facebook','twitter']"
     :title="title"
     :description='description'
-    :url='url'
     :image='image'
+    :url='url'
+    :contentByService='contentByService'
   )
 </template>
 
@@ -25,9 +26,21 @@ export default {
       return `${location.origin}/share.jpg`
     },
     url() {
-      return 'https://zoesever.com'
+      return 'https://zoesever.com/'
+    },
+    contentByService() {
+      return {
+        vkontakte: {
+          title: this.title + ' ' + this.description
+        },
+        twitter: {
+          title: this.title
+        },
+        facebook: {
+          title: this.title
+        }
+      }
     }
-
   }
 }
 </script>
