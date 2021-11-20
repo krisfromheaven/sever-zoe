@@ -50,7 +50,7 @@
         v-model="page"
         :page-count="pageCount"
         :click-handler="pageChangeHandler"
-        :page-range="10"
+        :page-range="$store.state.common.mobile ? 3 : 10"
         :prev-text="'prev'"
         :next-text="'next'"
         :container-class="'gallery__paginate'"
